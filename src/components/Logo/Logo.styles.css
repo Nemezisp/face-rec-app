@@ -1,0 +1,12 @@
+.tilt-logo {
+    height: 130px;
+    width: 130px;
+    background: linear-gradient(90deg, rgba(0,79,200,1) 0%, rgba(0,255,215,1) 32%, rgba(165,0,166,1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-image {
+    height: 120px;
+}
