@@ -25,9 +25,9 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "https://face-rec-app-11.herokuapp.com/",
-  "scope": "https://face-rec-app-11.herokuapp.com/",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "prefer_related_applications": false
 }
