@@ -3,7 +3,7 @@ import './Rank.styles.css'
 
 const Rank = ({userName, userEntries}) => {
     return (
-        <div> 
+        <div className='rank-container'> 
             <div className='f3'>
                 {`${userName}, your current entry count is...`}
             </div>

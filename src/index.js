@@ -1,10 +1,12 @@
 import React from 'react';
-import './index.css';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'tachyons';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import 'tachyons';
+import './index.css';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
