@@ -28,7 +28,7 @@ class Register extends React.Component {
     }
 
     onSubmitRegister = () => {
-        fetch('http://localhost:3000/register', {
+        fetch('https://face-rec-server-api.herokuapp.com/register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -41,7 +41,7 @@ class Register extends React.Component {
         .then(data => {
             if (data.userId && data.success === 'true') {
                 this.saveAuthTokenInSession(data.token)
-                fetch(`http://localhost:3000/profile/${data.userId}`, {
+                fetch(`https://face-rec-server-api.herokuapp.com/profile/${data.userId}`, {
                     method: 'get',
                     headers: {
                     'Content-Type': 'application/json',
