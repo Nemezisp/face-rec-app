@@ -60,7 +60,7 @@ const ResultTable = ({results}) => {
                 }
 
                 {
-                    (mode === 'general' || mode === 'food') && 
+                    ((mode === 'general' || mode === 'food') && results[0].length === 1) && 
                     <Fragment>
                         <h4>On the picture:</h4>
                         {results.map((result, index) => {
@@ -79,7 +79,7 @@ const ResultTable = ({results}) => {
                 }
 
                 {
-                    mode === 'color' && 
+                    (mode === 'color' && results[0].length === 1) && 
                     <Fragment>
                         <h4>Dominant colors:</h4>
                         {results.map((result, index) => {

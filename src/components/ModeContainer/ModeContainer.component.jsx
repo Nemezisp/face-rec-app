@@ -16,9 +16,9 @@ const ModeContainer = () => {
     const [results, setResults] = useState([])
 
     useEffect(() => {
+        setResults([])
         setImageUrl('')
         setBoxes([])
-        setResults([])
     }, [mode])
 
     const displayFaceBox = (boxes) => {
@@ -136,7 +136,6 @@ const ModeContainer = () => {
         })
         .then(response => response.json())
         .then((response) => {
-          console.log(response)
           if (response.status.code === 10000) {
             fetch('https://face-rec-server-api.herokuapp.com/image', {
               method: 'put',
