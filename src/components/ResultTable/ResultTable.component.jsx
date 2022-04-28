@@ -6,8 +6,6 @@ const ResultTable = ({results}) => {
     let { state } = useContext(StoreContext)
     let { mode } = state
 
-    console.log(results[0])
-
     const [wikiUrls, setWikiUrls] = useState([[]])
     const [resultPage, setResultPage] = useState(0)
 
