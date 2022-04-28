@@ -34,7 +34,7 @@ const ResultTable = ({results}) => {
         results.length > 0 ?
             <div className="glass results-container">
                 {
-                    (mode === 'celebrity' && results[0].length > 1) &&
+                    (mode === 'celebrity' && results[0].length) &&
                     <Fragment>
                         <h4>Celebrity no.{resultPage+1} on the picture:</h4>
                         {results[resultPage].map((result, index) => {
@@ -97,7 +97,7 @@ const ResultTable = ({results}) => {
                 }
 
                 {
-                    (mode === 'demographics' && results[0].length > 1) && 
+                    (mode === 'demographics' && results[0].length) && 
                     <Fragment>
                         <h4>Person no.{resultPage+1} on the picture is:</h4>
                         {results[resultPage].map((result, index) => {
