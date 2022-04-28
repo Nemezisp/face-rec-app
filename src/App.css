@@ -15,3 +15,36 @@
   right: 0;
   z-index: -1;
 }
+
+.choose-button {
+  padding: 10px 20px;
+  font-size: 20px;
+  width: 230px;
+  font-weight: 500;
+  background: linear-gradient(90deg, rgba(0,79,200,1) 0%, rgba(0,255,215,1) 32%, rgba(165,0,166,0.5441526952577906) 100%);
+  color: black;
+  font-weight: 800;
+  border: 3px solid black;
+}
+
+.choose-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.choose-button:hover {
+  color: white;
+}
+
+.current-mode-heading {
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+hr {
+  width: max(50%, 300px);
+  height: 3px !important;
+  margin-top: 5px !important;
+}

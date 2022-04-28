@@ -1,9 +1,3 @@
 .rank-container {
-    margin-top: 100px;
-}
-
-@media only screen and (max-width: 768px) {
-    .rank-container {
-      margin-top: 30px;
-    }
+    margin-top: 40px;
 }

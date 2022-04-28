@@ -35,7 +35,7 @@ class SignIn extends React.Component {
         .then(data => {
             if (data.userId && data.success === 'true') {
                 this.saveAuthTokenInSession(data.token)
-                fetch(`https://face-rec-server-api.herokuapp.com/profile/${data.userId}`, {
+                fetch(`https://face-rec-server-api.herokuapp.com/${data.userId}`, {
                     method: 'get',
                     headers: {
                     'Content-Type': 'application/json',

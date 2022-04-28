@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import StoreProvider from './context/store-context';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'tachyons';
@@ -13,7 +14,9 @@ const root = createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    <App />
+    <StoreProvider> 
+      <App />
+    </StoreProvider>
   </React.StrictMode>,
 );
 

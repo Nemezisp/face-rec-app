@@ -1,0 +1,28 @@
+.image-with-results-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 500px auto;
+    grid-gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .image-with-results-container {
+      grid-template-columns: 350px auto;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .image-with-results-container {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .image-with-results-container {
+      grid-template-columns: 300px;
+    }
+}
