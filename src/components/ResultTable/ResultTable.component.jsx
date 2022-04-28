@@ -10,7 +10,7 @@ const ResultTable = ({results}) => {
     const [resultPage, setResultPage] = useState(0)
 
     useEffect(() => {
-        if (mode === 'celebrity' && results.length > 0) {
+        if (mode === 'celebrity' && results[0].length) {
             setResultPage(0)
             let tempUrls = []
             for (let celebrityOnPicture of results) { //there may be few celebtiries on the picture
