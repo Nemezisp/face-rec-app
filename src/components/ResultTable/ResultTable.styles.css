@@ -9,10 +9,6 @@
     padding-bottom: 20px;
 }
 
-.results-container > h4 {
-    justify-self: flex-start;
-}
-
 .result {
     text-transform: capitalize;
     display: grid;
