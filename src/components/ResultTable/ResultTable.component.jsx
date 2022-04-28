@@ -6,6 +6,8 @@ const ResultTable = ({results}) => {
     let { state } = useContext(StoreContext)
     let { mode } = state
 
+    console.log(results[0])
+
     const [wikiUrls, setWikiUrls] = useState([[]])
     const [resultPage, setResultPage] = useState(0)
 
@@ -58,7 +60,7 @@ const ResultTable = ({results}) => {
                 }
 
                 {
-                    ((mode === 'general' || mode === 'food') && results[0].length === 1) && 
+                    ((mode === 'general' || mode === 'food') && !results[0].length) && 
                     <Fragment>
                         <h4>On the picture:</h4>
                         {results.map((result, index) => {
@@ -77,7 +79,7 @@ const ResultTable = ({results}) => {
                 }
 
                 {
-                    (mode === 'color' && results[0].length === 1) && 
+                    (mode === 'color' && !results[0].length) && 
                     <Fragment>
                         <h4>Dominant colors:</h4>
                         {results.map((result, index) => {
