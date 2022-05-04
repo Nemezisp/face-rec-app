@@ -1,0 +1,26 @@
+.local-form {
+    font-size: 24px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    cursor: pointer;
+    width: 200px;
+    border: black;
+}
+
+.file-detect-container {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.local-file-container {
+    margin-top: 20px;
+}
+
+.file-name-container {
+    max-width: 300px;
+}

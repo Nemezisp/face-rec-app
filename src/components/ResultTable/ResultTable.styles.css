@@ -35,7 +35,7 @@
     padding-left: 20px;
 }
 
-.results-navigation-button {
+.green-button {
     cursor: pointer;
     background-color: #9eebcf;
     font-weight: bold;
@@ -45,7 +45,7 @@
     align-self: flex-end;
 }
 
-.results-navigation-button:hover {
+.green-button:hover {
     color: white;
 }
 

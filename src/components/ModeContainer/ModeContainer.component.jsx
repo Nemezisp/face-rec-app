@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import FaceRecognition from '../FaceRecognition/FaceRecognition.component';
 import ImageLinkForm from '../ImageLinkForm/ImageLinkForm.component';
 import Rank from '../Rank/Rank.component';
@@ -117,12 +117,51 @@ const ModeContainer = () => {
         return
     }
 
+    const increaseEntriesCount = () => {
+      fetch('https://face-rec-server-api.herokuapp.com/image', {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': window.sessionStorage.getItem('token')
+        },
+        body: JSON.stringify({
+            id: user.id,
+        })
+      })
+      .then(response => response.json())
+      .then(count => {
+          dispatch({
+              type: ACTION_TYPES.SET_USER,
+              payload: Object.assign(user, {entries: count})
+          })
+      })
+      .catch(console.log)
+    }
+
+    const displayResults = (response) => {
+      if (mode === 'demographics') {
+        displayFaceBox(calculateFaceLocation(response.results[0]))
+        getDemographicResults(response.results[0])
+      }
+
+      if (mode === 'face' || mode === 'celebrity') {
+        displayFaceBox(calculateFaceLocation(response))
+      }
+
+      if (mode !== 'face' && mode !== "demographics") {
+        getResults(response)
+      }
+
+      let image = document.getElementById('inputimage')
+      image.scrollIntoView()
+    }
+
     const onInputChange = (event) => {
         setInput(event.target.value)
     }
 
     const onSubmit = () => {
-        setImageUrl(input)
+        !imageUrl && setImageUrl(input)
         fetch('https://face-rec-server-api.herokuapp.com/imageurl', {
           method: 'post',
           headers: {
@@ -137,36 +176,8 @@ const ModeContainer = () => {
         .then(response => response.json())
         .then((response) => {
           if (response.status.code === 10000) {
-            fetch('https://face-rec-server-api.herokuapp.com/image', {
-              method: 'put',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': window.sessionStorage.getItem('token')
-              },
-              body: JSON.stringify({
-                  id: user.id,
-              })
-            })
-            .then(response => response.json())
-            .then(count => {
-                dispatch({
-                    type: ACTION_TYPES.SET_USER,
-                    payload: Object.assign(user, {entries: count})
-                })
-            })
-            .catch(console.log)
-          }
-          if (mode === 'demographics') {
-            displayFaceBox(calculateFaceLocation(response.results[0]))
-            getDemographicResults(response.results[0])
-          }
-
-          if (mode === 'face' || mode === 'celebrity') {
-            displayFaceBox(calculateFaceLocation(response))
-          }
-
-          if (mode !== 'face' && mode !== "demographics") {
-            getResults(response)
+            increaseEntriesCount()
+            displayResults(response)
           }
         })
         .catch(err => console.log(err))
@@ -174,23 +185,16 @@ const ModeContainer = () => {
 
     return (
         <div className='rank-container'> 
-            {mode === 'face' && 
-                <Fragment>
-                    <Rank userEntries={user.entries} userName={user.name}/>
-                    <ImageLinkForm onSubmit={onSubmit} onInputChange={onInputChange}/>
-                    <FaceRecognition boxes={boxes} imageUrl={imageUrl}/>
-                </Fragment>
-            }
-            {(mode === 'celebrity' || mode === 'general' || mode === 'food' || mode === 'demographics' || mode === 'color') && 
-                <Fragment>
-                    <Rank userEntries={user.entries} userName={user.name}/>
-                    <ImageLinkForm onSubmit={onSubmit} onInputChange={onInputChange}/>
-                    <div className='image-with-results-container'>
-                        <FaceRecognition boxes={boxes} imageUrl={imageUrl}/>
-                        <ResultTable results={results}/>
-                    </div>
-                </Fragment>
-            }
+          <Rank userEntries={user.entries} userName={user.name}/>
+          <ImageLinkForm onSubmit={onSubmit} 
+                         onInputChange={onInputChange} 
+                         setImageUrl={setImageUrl}
+                         increaseEntriesCount={increaseEntriesCount}
+                         displayResults={displayResults}/>
+          <div className='image-with-results-container'>
+              <FaceRecognition boxes={boxes} imageUrl={imageUrl}/>
+              {mode !== 'face' &&  <ResultTable results={results}/>}
+          </div>
         </div>
 
     )
