@@ -32,7 +32,8 @@ const StoreProvider = ({children}) => {
       name: '',
       email: '',
       entries: 0,
-      joined: ''
+      joined: '',
+      profile_picture_url: ''
     },
     mode: 'face',
     route: 'signin'

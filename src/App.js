@@ -103,7 +103,8 @@ class App extends Component {
         name: data.name,
         email: data.email,
         entries: data.entries,
-        joined: data.joined
+        joined: data.joined,
+        profile_picture_url: data.profile_picture_url
       }
     })
   }

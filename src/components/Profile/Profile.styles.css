@@ -19,3 +19,34 @@
 .modal-close:hover {
     color: grey;
 }
+
+.profile-pic-upload-button {
+    border: 2px solid rgba( 0, 0, 0, .2 );
+    margin-top: 5px;
+    font-size: 14px;
+    width: 130px;
+    text-align: center;
+}
+
+.picture-name-container {
+    margin-top: 5px;
+}
+
+.profile-picture-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-picture-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-picture {
+    height: 100px;
+    max-width: 200px;
+}
+
+.profile-name {
+    margin-top: 10px;
+}

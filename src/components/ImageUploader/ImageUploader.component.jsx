@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import Resizer from "react-image-file-resizer";
 
 import { StoreContext } from '../../context/store-context';
 import './ImageUploader.styles.css';
@@ -8,6 +9,23 @@ const ImageUploader = ({setImageUrl, increaseEntriesCount, displayResults}) => {
     const {mode} = state;
 
     const [file, setFile] = useState(null)
+
+    const resizeFile = (file) =>
+        new Promise((resolve) => {
+            Resizer.imageFileResizer(
+                file,
+                512,
+                10000,
+                "JPEG",
+                80,
+                0,
+                (uri) => {
+                    resolve(uri);
+                },
+                "file"
+            );
+        }
+    );
 
     const submitFile = () => {
         let pictureUrl = URL.createObjectURL(file)
@@ -25,34 +43,42 @@ const ImageUploader = ({setImageUrl, increaseEntriesCount, displayResults}) => {
         })
         .then(response => response.json())
         .then((response) => {
-          if (response.status.code === 10000) {
-            increaseEntriesCount()
-            displayResults(response)
-          }
+            if (response.status.code === 10000) {
+                increaseEntriesCount()
+                displayResults(response)
+            }
         })
         .catch(err => console.log(err))
    }
 
-   const handleInputChange = (event) => {
-        setFile(event.target.files[0])
+   const handleInputChange = async (event) => {
+        const file = event.target.files[0]
+
+        if (file.type !== "image/jpeg" && file.type !== "image/png") {
+            alert('Wrong file type! Use jpeg or png.')
+            return
+        }
+        
+        const resizedFile = await resizeFile(file)
+        setFile(resizedFile)
    }
 
     return (
         <div className='local-file-container'>
-            <span className = 'f4-l f5'> Or upload image from file: </span>
+            <span className = 'f4-l f5'> Or upload image from file (png or jpeg): </span>
             <form className='local-form'>
-                <label for="file-upload" className="grow f5 link ph3 ml1 pv2 ba dib white bg-light-purple custom-file-upload">
-                    Upload file
+                <label htmlFor="file-upload" className="grow f5 link ph3 ml1 pv2 ba dib white bg-light-purple custom-file-upload">
+                    Upload image
                 </label>
                 <input
                     type="file"
                     id="file-upload"
-                    accept="image/gif, image/jpeg, image/png, image/jpg" 
+                    accept="image/jpeg, image/png" 
                     name="image"
                     onChange={event => handleInputChange(event)}
                 />
                 {file && <div className='file-detect-container'>
-                            <span className='file-name-container'>{file.name.substring(0, 20)}{file.name.length>20 ? '...' : null}</span>
+                            <span className='file-name-container'>{file.name.length>20 ? file.name.substring(0, 20) + '...' : file.name}</span>
                             <button onClick={() => submitFile()} type='button' className='grow f5 link ph3 ml1 pv2 ba dib white bg-light-purple'>Detect</button>
                          </div>
                 }       

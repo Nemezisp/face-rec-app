@@ -1,6 +1,8 @@
 import React from 'react'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import './ProfileIcon.styles.css'
+import { StoreContext } from '../../context/store-context';
+
 
 class ProfileIcon extends React.Component {
     constructor(props) {
@@ -10,6 +12,8 @@ class ProfileIcon extends React.Component {
             dropdownOpen: false
         }
     }
+
+    static contextType = StoreContext;
 
     toggle = () => {
         this.setState(prevState => ({
@@ -23,8 +27,10 @@ class ProfileIcon extends React.Component {
     }
 
     render() {
+        const {user} = this.context.state
+
         return (
-            <div className='pa4 tc'>
+            <div className='pa3 tc'>
                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                 <DropdownToggle
                     tag="span"
@@ -32,12 +38,12 @@ class ProfileIcon extends React.Component {
                     aria-expanded={this.state.dropdownOpen}
                     >
                     <img 
-                        src="https://st3.depositphotos.com/6672868/14083/v/450/depositphotos_140830032-stock-illustration-user-profile-group.jpg"
-                        className="br4 w3 dib profile-icon" alt="avatar" />
+                        src={user.profile_picture_url ? `${user.profile_picture_url + '?' +  Date.now()}` : "https://st3.depositphotos.com/6672868/14083/v/450/depositphotos_140830032-stock-illustration-user-profile-group.jpg"}
+                        className="br4 dib profile-icon" alt="avatar" />
                 </DropdownToggle>
                     <DropdownMenu 
                         className='b--transaprent shadow-5'
-                        style={{marginTop: '20px', backgroundColor: 'rgba(255, 255, 255, 0.5)'}}>
+                        style={{marginTop: '36px', backgroundColor: 'rgba(255, 255, 255, 0.9)'}}>
                     <DropdownItem onClick={this.props.toggleModal}>View Profile</DropdownItem>
                     <DropdownItem onClick={this.handleSignOut}>Sign Out</DropdownItem>
                     </DropdownMenu>

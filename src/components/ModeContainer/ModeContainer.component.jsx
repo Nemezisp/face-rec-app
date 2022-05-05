@@ -30,7 +30,7 @@ const ModeContainer = () => {
     const createResultsArray = (results) => {
         let resultsArray = []
         let singleContext;
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < results.length; i++) {
             if (mode === 'color') {
                 singleContext = {
                     name: results[i].raw_hex,
@@ -102,6 +102,7 @@ const ModeContainer = () => {
           const width = Number(image.width);
           const height = Number(image.height);
           let boxes = []
+
       
           for (let i = 0; i < regions.length; i++) {
             const clarifaiFace = regions[i].region_info.bounding_box;
@@ -109,7 +110,7 @@ const ModeContainer = () => {
               leftCol: clarifaiFace.left_col * width,
               topRow: clarifaiFace.top_row * height,
               rightCol: width - (clarifaiFace.right_col * width),
-              bottomRow: height - (clarifaiFace.bottom_row * height)
+              bottomRow: height - (clarifaiFace.bottom_row * height),
             })
           }
           return boxes
@@ -118,7 +119,7 @@ const ModeContainer = () => {
     }
 
     const increaseEntriesCount = () => {
-      fetch('https://face-rec-server-api.herokuapp.com/image', {
+      fetch('linki: https://face-rec-server-api.herokuapp.com/image', {
         method: 'put',
         headers: {
           'Content-Type': 'application/json',
@@ -152,8 +153,9 @@ const ModeContainer = () => {
         getResults(response)
       }
 
+      let resultsTable = document.getElementById('results-table')
       let image = document.getElementById('inputimage')
-      image.scrollIntoView()
+      resultsTable ? resultsTable.scrollIntoView() : image.scrollIntoView()
     }
 
     const onInputChange = (event) => {
@@ -161,7 +163,7 @@ const ModeContainer = () => {
     }
 
     const onSubmit = () => {
-        !imageUrl && setImageUrl(input)
+        input && setImageUrl(input)
         fetch('https://face-rec-server-api.herokuapp.com/imageurl', {
           method: 'post',
           headers: {

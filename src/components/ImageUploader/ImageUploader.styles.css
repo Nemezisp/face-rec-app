@@ -9,7 +9,7 @@ input[type="file"] {
 .custom-file-upload {
     cursor: pointer;
     width: 200px;
-    border: black;
+    border: 1px solid black;
 }
 
 .file-detect-container {

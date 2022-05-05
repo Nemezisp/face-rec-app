@@ -1,4 +1,10 @@
+.profile-icon {
+    height: 85px;
+    max-width: 170px;
+    box-shadow: 0px 0px 2px 2px grey;
+}
+
 .profile-icon:hover {
-    opacitY: 0.7;
+    opacity: 0.7;
     cursor: pointer;
 }

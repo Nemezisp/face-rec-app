@@ -32,15 +32,15 @@ const ResultTable = ({results}) => {
 
     return (
         results.length > 0 ?
-            <div className="glass results-container">
+            <div id="results-table" className="glass results-container">
                 {
                     (mode === 'celebrity' && results[0].length) &&
                     <Fragment>
                         <h4>Celebrity no.{resultPage+1} on the picture:</h4>
                         {results[resultPage].map((result, index) => {
                             return (
-                                <div>
-                                    <div key={index} className="result">
+                                <div key={index}>
+                                    <div className="result">
                                         <div className="result-name">
                                             {result.name}
                                             {<a className='wiki-link' target="_blank" rel="noopener noreferrer" href={wikiUrls[resultPage] && wikiUrls[resultPage][index]}>Wiki</a>}
@@ -63,8 +63,8 @@ const ResultTable = ({results}) => {
                         <h4>On the picture:</h4>
                         {results.map((result, index) => {
                             return (
-                                <div>
-                                    <div key={index} className="result">
+                                <div key={index}>
+                                    <div className="result">
                                         <div className="result-name">
                                             {result.name}
                                         </div>
@@ -82,8 +82,8 @@ const ResultTable = ({results}) => {
                         <h4>Dominant colors:</h4>
                         {results.map((result, index) => {
                             return (
-                                <div className="color-results-container">
-                                    <div key={index} className="result">
+                                <div key={index} className="color-results-container">
+                                    <div className="result">
                                         <div className="result-name">
                                             {result.name}
                                         </div>
@@ -102,8 +102,8 @@ const ResultTable = ({results}) => {
                         <h4>Person no.{resultPage+1} on the picture is:</h4>
                         {results[resultPage].map((result, index) => {
                             return (
-                                <div>
-                                    <div key={index} className="result">
+                                <div key={index}>
+                                    <div className="result">
                                         <div className="result-name">
                                             {result.name}
                                         </div>
