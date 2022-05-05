@@ -119,7 +119,7 @@ const ModeContainer = () => {
     }
 
     const increaseEntriesCount = () => {
-      fetch('linki: https://face-rec-server-api.herokuapp.com/image', {
+      fetch('https://face-rec-server-api.herokuapp.com/image', {
         method: 'put',
         headers: {
           'Content-Type': 'application/json',
