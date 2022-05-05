@@ -30,7 +30,7 @@ const ModeContainer = () => {
     const createResultsArray = (results) => {
         let resultsArray = []
         let singleContext;
-        for (let i = 0; i < results.length; i++) {
+        for (let i = 0; i < Math.min(5, results.length); i++) {
             if (mode === 'color') {
                 singleContext = {
                     name: results[i].raw_hex,
