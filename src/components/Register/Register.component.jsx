@@ -33,8 +33,10 @@ class Register extends React.Component {
     }
 
     onSubmitRegister = () => {
+        let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
+
         this.toggleIsLoading()
-        fetch('https://face-rec-server-api.herokuapp.com/register', {
+        fetch(`${url}/register`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -47,7 +49,7 @@ class Register extends React.Component {
         .then(data => {
             if (data.userId && data.success === 'true') {
                 this.saveAuthTokenInSession(data.token)
-                fetch(`https://face-rec-server-api.herokuapp.com/profile/${data.userId}`, {
+                fetch(`${url}/profile/${data.userId}`, {
                     method: 'get',
                     headers: {
                     'Content-Type': 'application/json',
@@ -66,7 +68,8 @@ class Register extends React.Component {
             } 
         })
         .catch(err => {
-            alert(err.message)
+            this.toggleIsLoading()
+            alert('User with that email already exists!')
         })
     }
 

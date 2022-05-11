@@ -50,7 +50,9 @@ class Profile extends React.Component {
    }
 
     changeProfilePicture = () => {
-        fetch(`https://face-rec-server-api.herokuapp.com/S3url?name=${this.context.state.user.id + '.jpeg'}`, {
+        let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
+
+        fetch(`${url}/S3url?name=${this.context.state.user.id + '.jpeg'}`, {
                 headers: {'Authorization': window.sessionStorage.getItem('token')},
                 method: 'get'
             })
@@ -64,7 +66,7 @@ class Profile extends React.Component {
             })
             .then(response => {
                 const s3imageUrl = response.url.split('?')[0]
-                fetch(`https://face-rec-server-api.herokuapp.com/profilepicture/${this.context.state.user.id}`, {
+                fetch(`${url}/profilepicture/${this.context.state.user.id}`, {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
@@ -90,7 +92,9 @@ class Profile extends React.Component {
     }
 
     onProfileUpdate = (data) => {
-        fetch(`http://localhost:3000/profile/${this.context.state.user.id}`, {
+        let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
+
+        fetch(`${url}/profile/${this.context.state.user.id}`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',

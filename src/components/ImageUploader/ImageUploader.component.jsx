@@ -34,7 +34,9 @@ const ImageUploader = ({setImageUrl, increaseEntriesCount, displayResults}) => {
         const formData = new FormData();
         formData.append('image', file)
 
-        fetch(`https://face-rec-server-api.herokuapp.com/localimage?model=${mode}`, {
+        let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
+
+        fetch(`${url}/localimage?model=${mode}`, {
             method: 'post',
             headers: {
                 'Authorization': window.sessionStorage.getItem('token'),

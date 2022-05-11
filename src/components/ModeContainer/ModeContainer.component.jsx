@@ -15,6 +15,8 @@ const ModeContainer = () => {
     const [boxes, setBoxes] = useState([])
     const [results, setResults] = useState([])
 
+    let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
+
     useEffect(() => {
         setResults([])
         setImageUrl('')
@@ -119,7 +121,7 @@ const ModeContainer = () => {
     }
 
     const increaseEntriesCount = () => {
-      fetch('https://face-rec-server-api.herokuapp.com/image', {
+      fetch(`${url}/image`, {
         method: 'put',
         headers: {
           'Content-Type': 'application/json',
@@ -166,7 +168,7 @@ const ModeContainer = () => {
 
     const onSubmit = () => {
         input && setImageUrl(input)
-        fetch('https://face-rec-server-api.herokuapp.com/imageurl', {
+        fetch(`${url}/imageurl`, {
           method: 'post',
           headers: {
             'Content-Type': 'application/json', 

@@ -28,8 +28,10 @@ class SignIn extends React.Component {
     }
 
     onSubmitSignIn = () => {
+        let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
+
         this.toggleIsLoading()
-        fetch('https://face-rec-server-api.herokuapp.com/signin', {
+        fetch(`${url}/signin`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -41,7 +43,7 @@ class SignIn extends React.Component {
         .then(data => {
             if (data.userId && data.success === 'true') {
                 this.saveAuthTokenInSession(data.token)
-                fetch(`https://face-rec-server-api.herokuapp.com/profile/${data.userId}`, {
+                fetch(`${url}/profile/${data.userId}`, {
                     method: 'get',
                     headers: {
                         'Content-Type': 'application/json',
@@ -57,12 +59,11 @@ class SignIn extends React.Component {
                     }
                 })
                 .catch(err => console.log(err))
-            } else {
-                alert('Wrong credentials')
             }
         })
         .catch(err => {
-            alert(err.message)
+            this.toggleIsLoading()
+            alert('Wrong credentials')
         })
     }
 

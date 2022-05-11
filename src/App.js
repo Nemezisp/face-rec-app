@@ -63,9 +63,10 @@ class App extends Component {
   static contextType = StoreContext;
 
   componentDidMount() {
+    let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
     const token = window.sessionStorage.getItem('token')
     if (token) {
-      fetch('https://face-rec-server-api.herokuapp.com/signin', {
+      fetch(`${url}/signin`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -75,7 +76,7 @@ class App extends Component {
       .then(res => res.json())
       .then(data => {
         if (data && data.id) {
-          fetch(`https://face-rec-server-api.herokuapp.com/profile/${data.id}`, {
+          fetch(`${url}/profile/${data.id}`, {
             method: 'get',
             headers: {
               'Content-Type': 'application/json',
