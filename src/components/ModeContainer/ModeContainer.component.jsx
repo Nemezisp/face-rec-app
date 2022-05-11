@@ -185,7 +185,7 @@ const ModeContainer = () => {
             increaseEntriesCount()
             displayResults(response)
           } else {
-            alert(response.status.description)
+            alert(response.outputs[0].status.description)
           }
         })
         .catch(err => {
