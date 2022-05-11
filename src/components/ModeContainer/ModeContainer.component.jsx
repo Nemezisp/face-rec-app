@@ -184,6 +184,8 @@ const ModeContainer = () => {
           if (response.status.code === 10000) {
             increaseEntriesCount()
             displayResults(response)
+          } else {
+            alert(response.status.argument)
           }
         })
         .catch(err => {
