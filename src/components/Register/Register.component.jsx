@@ -7,7 +7,8 @@ class Register extends React.Component {
         this.state = {
             email: '',
             password: '',
-            name: ''
+            name: '',
+            isLoading: false
         }
     }
 
@@ -27,7 +28,12 @@ class Register extends React.Component {
         window.sessionStorage.setItem('token', token)
     }
 
+    toggleIsLoading = () => {
+        this.setState({isLoading: !this.state.isLoading})
+    }
+
     onSubmitRegister = () => {
+        this.toggleIsLoading()
         fetch('https://face-rec-server-api.herokuapp.com/register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -51,11 +57,16 @@ class Register extends React.Component {
                 .then(res => res.json())
                 .then(user => {
                     if (user && user.email) {
-                    this.props.loadUser(user)
-                    this.props.onRouteChange('home')
+                        this.toggleIsLoading()
+                        this.props.loadUser(user)
+                        this.props.onRouteChange('home')
                     }
                 })
+                .catch(err => console.log(err))
             } 
+        })
+        .catch(err => {
+            alert(err.message)
         })
     }
 
@@ -96,7 +107,7 @@ class Register extends React.Component {
                             onClick = {this.onSubmitRegister}
                             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                             type="submit" 
-                            value="Register"
+                            value={isLoading ? "Loading": "Register"}
                         />
                         </div>
                     </div>

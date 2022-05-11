@@ -6,7 +6,8 @@ class SignIn extends React.Component {
         super(props)
         this.state = {
             signInEmail: '',
-            signInPassword: ''
+            signInPassword: '',
+            isLoading: false
         }
     }
 
@@ -22,7 +23,12 @@ class SignIn extends React.Component {
         window.sessionStorage.setItem('token', token)
     }
 
+    toggleIsLoading = () => {
+        this.setState({isLoading: !this.state.isLoading})
+    }
+
     onSubmitSignIn = () => {
+        this.toggleIsLoading()
         fetch('https://face-rec-server-api.herokuapp.com/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -38,18 +44,25 @@ class SignIn extends React.Component {
                 fetch(`https://face-rec-server-api.herokuapp.com/profile/${data.userId}`, {
                     method: 'get',
                     headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': data.token
+                        'Content-Type': 'application/json',
+                        'Authorization': data.token
                     }
                 })
                 .then(res => res.json())
                 .then(user => {
                     if (user && user.email) {
-                    this.props.loadUser(user)
-                    this.props.onRouteChange('home')
+                        this.toggleIsLoading()
+                        this.props.loadUser(user)
+                        this.props.onRouteChange('home')
                     }
                 })
-            } 
+                .catch(err => console.log(err))
+            } else {
+                alert('Wrong credentials')
+            }
+        })
+        .catch(err => {
+            alert(err.message)
         })
     }
 
@@ -84,7 +97,7 @@ class SignIn extends React.Component {
                             onClick = {this.onSubmitSignIn}
                             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                             type="submit" 
-                            value="Sign in"
+                            value={isLoading ? "Loading user" : "Sign in"}
                         />
                         </div>
                         <div className="lh-copy mt3">

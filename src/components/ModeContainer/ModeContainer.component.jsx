@@ -136,7 +136,9 @@ const ModeContainer = () => {
               payload: Object.assign(user, {entries: count})
           })
       })
-      .catch(console.log)
+      .catch(err => {
+        console.log(err)
+      })
     }
 
     const displayResults = (response) => {
@@ -180,9 +182,13 @@ const ModeContainer = () => {
           if (response.status.code === 10000) {
             increaseEntriesCount()
             displayResults(response)
+          } else {
+            alert('Unable to work with API')
           }
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err)
+        })
     }
 
     return (

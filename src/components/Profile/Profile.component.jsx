@@ -90,7 +90,7 @@ class Profile extends React.Component {
     }
 
     onProfileUpdate = (data) => {
-        fetch(`https://face-rec-server-api.herokuapp.com/profile/${this.context.state.user.id}`, {
+        fetch(`http://localhost:3000/profile/${this.context.state.user.id}`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -99,7 +99,6 @@ class Profile extends React.Component {
             body: JSON.stringify({formInput: data})
         }).then(res => {
             if (res.status === 200 || res.status === 304) {
-                //this.props.toggleModal();
                 this.props.loadUser({...this.context.state.user, ...data});
             }
         }).catch(console.log)
