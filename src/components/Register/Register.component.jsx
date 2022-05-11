@@ -107,7 +107,7 @@ class Register extends React.Component {
                             onClick = {this.onSubmitRegister}
                             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                             type="submit" 
-                            value={isLoading ? "Loading": "Register"}
+                            value={this.state.isLoading ? "Loading": "Register"}
                         />
                         </div>
                     </div>

@@ -97,7 +97,7 @@ class SignIn extends React.Component {
                             onClick = {this.onSubmitSignIn}
                             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                             type="submit" 
-                            value={isLoading ? "Loading user" : "Sign in"}
+                            value={this.state.isLoading ? "Loading user" : "Sign in"}
                         />
                         </div>
                         <div className="lh-copy mt3">
