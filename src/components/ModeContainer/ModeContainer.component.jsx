@@ -184,11 +184,10 @@ const ModeContainer = () => {
           if (response.status.code === 10000) {
             increaseEntriesCount()
             displayResults(response)
-          } else {
-            alert('Unable to work with API')
           }
         })
         .catch(err => {
+          alert("Unable to work with API")
           console.log(err)
         })
     }
