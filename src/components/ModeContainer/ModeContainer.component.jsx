@@ -181,11 +181,11 @@ const ModeContainer = () => {
         })
         .then(response => response.json())
         .then((response) => {
-          if (response.status.code === 10000) {
+          if (response.outputs.status.code === 10000) {
             increaseEntriesCount()
             displayResults(response)
           } else {
-            alert(response.status.argument)
+            alert(response.outputs.status.argument)
           }
         })
         .catch(err => {
