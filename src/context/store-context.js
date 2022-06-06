@@ -5,7 +5,8 @@ export const StoreContext = createContext();
 export const ACTION_TYPES = {
   SET_USER: 'SET_USER',
   SET_MODE: 'SET_MODE',
-  SET_ROUTE: 'SET_ROUTE'
+  SET_ROUTE: 'SET_ROUTE',
+  SET_CURRENT_FACE: 'SET_CURRENT_FACE'
 }
 
 const storeReducer = (state, action) => {
@@ -18,6 +19,9 @@ const storeReducer = (state, action) => {
     }
     case ACTION_TYPES.SET_ROUTE: {
       return {...state, route: action.payload}
+    }
+    case ACTION_TYPES.SET_CURRENT_FACE: {
+      return {...state, currentFaceIndex: action.payload}
     }
     default: {
       return state
@@ -36,7 +40,8 @@ const StoreProvider = ({children}) => {
       profile_picture_url: ''
     },
     mode: 'face',
-    route: 'signin'
+    route: 'signin',
+    currentFaceIndex: null
   }
 
   const [state, dispatch] = useReducer(storeReducer, initialState)

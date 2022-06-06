@@ -1,10 +1,10 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import './ResultTable.styles.css';
-import { StoreContext } from "../../context/store-context";
+import { StoreContext, ACTION_TYPES } from "../../context/store-context";
 
 const ResultTable = ({results}) => {
-    let { state } = useContext(StoreContext)
-    let { mode } = state
+    const { dispatch, state } = useContext(StoreContext)
+    const { mode } = state
 
     const [wikiUrls, setWikiUrls] = useState([[]])
     const [resultPage, setResultPage] = useState(0)
@@ -30,6 +30,14 @@ const ResultTable = ({results}) => {
         }
     }, [mode, results])
 
+    const handleChangeResultPage = (index) => {
+        setResultPage(index)
+        dispatch({
+            type: ACTION_TYPES.SET_CURRENT_FACE,
+            payload: index
+        })
+    }
+
     return (
         results.length > 0 ?
             <div id="results-table" className="glass results-container">
@@ -51,8 +59,8 @@ const ResultTable = ({results}) => {
                             )
                         })}
                         <div className="results-navigation" >
-                            {resultPage > 0 && <button onClick={() => setResultPage(resultPage-1)} className="results-navigation-button previous grow">Previous</button>}
-                            {resultPage < results.length-1 && <button onClick={() => setResultPage(resultPage+1)} className="results-navigation-button next grow">Next</button>}
+                            {resultPage > 0 && <button onClick={() => handleChangeResultPage(resultPage-1)} className="results-navigation-button previous grow">Previous</button>}
+                            {resultPage < results.length-1 && <button onClick={() => handleChangeResultPage(resultPage+1)} className="results-navigation-button next grow">Next</button>}
                         </div>
                     </Fragment>
                 }
@@ -113,8 +121,8 @@ const ResultTable = ({results}) => {
                             )
                         })}
                         <div className="results-navigation" >
-                            {resultPage > 0 && <button onClick={() => setResultPage(resultPage-1)} className="green-button previous grow">Previous</button>}
-                            {resultPage < results.length-1 && <button onClick={() => setResultPage(resultPage+1)} className="green-button next grow">Next</button>}
+                            {resultPage > 0 && <button onClick={() => handleChangeResultPage(resultPage-1)} className="green-button previous grow">Previous</button>}
+                            {resultPage < results.length-1 && <button onClick={() => handleChangeResultPage(resultPage+1)} className="green-button next grow">Next</button>}
                         </div>
                     </Fragment>
                 }
@@ -123,6 +131,5 @@ const ResultTable = ({results}) => {
             null
     )
 }
-
 
 export default ResultTable

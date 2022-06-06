@@ -92,7 +92,6 @@ const ModeContainer = () => {
 
     const calculateFaceLocation = (data) => {
         if (data && data.outputs) {
-
           let regions;
           if (mode === 'demographics') {
             regions = data.outputs[2].data.regions
@@ -115,6 +114,14 @@ const ModeContainer = () => {
               bottomRow: height - (clarifaiFace.bottom_row * height),
             })
           }
+
+          if ((mode === "demographics" || mode === "celebrity") && boxes.length > 1) {
+            dispatch({
+              type: ACTION_TYPES.SET_CURRENT_FACE,
+              payload: 0
+            })
+          }
+ 
           return boxes
         }
         return

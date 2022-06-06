@@ -127,6 +127,10 @@ class App extends Component {
       type: ACTION_TYPES.SET_MODE,
       payload: mode
     })
+    this.context.dispatch({
+      type: ACTION_TYPES.SET_CURRENT_FACE,
+      payload: null
+    })
   }
 
   toggleProfileModal = () => {
