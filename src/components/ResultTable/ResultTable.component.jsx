@@ -59,8 +59,8 @@ const ResultTable = ({results}) => {
                             )
                         })}
                         <div className="results-navigation" >
-                            {resultPage > 0 && <button onClick={() => handleChangeResultPage(resultPage-1)} className="results-navigation-button previous grow">Previous</button>}
-                            {resultPage < results.length-1 && <button onClick={() => handleChangeResultPage(resultPage+1)} className="results-navigation-button next grow">Next</button>}
+                            {resultPage > 0 && <button onClick={() => handleChangeResultPage(resultPage-1)} className="green-button previous grow">Previous</button>}
+                            {resultPage < results.length-1 && <button onClick={() => handleChangeResultPage(resultPage+1)} className="green-button next grow">Next</button>}
                         </div>
                     </Fragment>
                 }
