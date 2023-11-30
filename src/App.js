@@ -9,7 +9,7 @@ import Modal from './components/Modal/Modal.component';
 import Profile from './components/Profile/Profile.component';
 import ChooseMode from './components/ChooseMode/ChooseMode.component';
 import ModeContainer from './components/ModeContainer/ModeContainer.component';
-import { url } from '../../utils/apiUrl'
+import { url } from './utils/apiUrl'
 
 import { StoreContext, ACTION_TYPES } from './context/store-context';
 
