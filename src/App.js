@@ -9,6 +9,7 @@ import Modal from './components/Modal/Modal.component';
 import Profile from './components/Profile/Profile.component';
 import ChooseMode from './components/ChooseMode/ChooseMode.component';
 import ModeContainer from './components/ModeContainer/ModeContainer.component';
+import { url } from '../../utils/apiUrl'
 
 import { StoreContext, ACTION_TYPES } from './context/store-context';
 
@@ -63,7 +64,6 @@ class App extends Component {
   static contextType = StoreContext;
 
   componentDidMount() {
-    let url = process.env.API_URL || 'http://localhost:3000'
     const token = window.sessionStorage.getItem('token')
     if (token) {
       fetch(`${url}/signin`, {

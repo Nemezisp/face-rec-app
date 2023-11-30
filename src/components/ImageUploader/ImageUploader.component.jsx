@@ -3,6 +3,7 @@ import Resizer from "react-image-file-resizer";
 
 import { StoreContext } from '../../context/store-context';
 import './ImageUploader.styles.css';
+import { url } from '../../utils/apiUrl'
 
 const ImageUploader = ({setImageUrl, increaseEntriesCount, displayResults}) => {
     const {state} = useContext(StoreContext)
@@ -33,8 +34,6 @@ const ImageUploader = ({setImageUrl, increaseEntriesCount, displayResults}) => {
 
         const formData = new FormData();
         formData.append('image', file)
-
-        let url = process.env.API_URL || 'http://localhost:3000'
 
         fetch(`${url}/localimage?model=${mode}`, {
             method: 'post',

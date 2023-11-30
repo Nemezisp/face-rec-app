@@ -2,6 +2,7 @@ import React from "react";
 import Resizer from "react-image-file-resizer";
 import './Profile.styles.css'
 import { StoreContext } from '../../context/store-context';
+import { url } from '../../utils/apiUrl'
 
 class Profile extends React.Component {
     static contextType = StoreContext;
@@ -50,8 +51,6 @@ class Profile extends React.Component {
    }
 
     changeProfilePicture = () => {
-        let url = process.env.API_URL || 'http://localhost:3000'
-
         fetch(`${url}/S3url?name=${this.context.state.user.id + '.jpeg'}`, {
                 headers: {'Authorization': window.sessionStorage.getItem('token')},
                 method: 'get'
@@ -92,8 +91,6 @@ class Profile extends React.Component {
     }
 
     onProfileUpdate = (data) => {
-        let url = process.env.API_URL || 'http://localhost:3000'
-
         fetch(`${url}/profile/${this.context.state.user.id}`, {
             method: 'post',
             headers: {

@@ -5,6 +5,7 @@ import Rank from '../Rank/Rank.component';
 import ResultTable from '../ResultTable/ResultTable.component';
 import './ModeContainer.styles.css'
 import { ACTION_TYPES, StoreContext } from "../../context/store-context";
+import { url } from '../../utils/apiUrl'
 
 const ModeContainer = () => {
     const {dispatch, state} = useContext(StoreContext);
@@ -14,8 +15,6 @@ const ModeContainer = () => {
     const [imageUrl, setImageUrl] = useState('')
     const [boxes, setBoxes] = useState([])
     const [results, setResults] = useState([])
-
-    let url = process.env.API_URL || 'http://localhost:3000'
 
     useEffect(() => {
         setResults([])

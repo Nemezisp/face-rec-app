@@ -1,5 +1,6 @@
 import React from 'react'
 import './SignIn.styles.css'
+import { url } from '../../utils/apiUrl'
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -28,8 +29,6 @@ class SignIn extends React.Component {
     }
 
     onSubmitSignIn = () => {
-        let url = process.env.API_URL || 'http://localhost:3000'
-
         this.toggleIsLoading()
         fetch(`${url}/signin`, {
             method: 'post',

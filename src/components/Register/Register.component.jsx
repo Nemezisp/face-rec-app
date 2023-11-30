@@ -1,5 +1,6 @@
 import React from 'react'
 import './Register.styles.css'
+import { url } from '../../utils/apiUrl'
 
 class Register extends React.Component {
     constructor(props) {
@@ -33,8 +34,6 @@ class Register extends React.Component {
     }
 
     onSubmitRegister = () => {
-        let url = process.env.API_URL || 'http://localhost:3000'
-
         this.toggleIsLoading()
         fetch(`${url}/register`, {
             method: 'post',
