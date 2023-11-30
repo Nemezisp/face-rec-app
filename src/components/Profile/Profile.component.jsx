@@ -50,7 +50,7 @@ class Profile extends React.Component {
    }
 
     changeProfilePicture = () => {
-        let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
+        let url = process.env.API_URL || 'http://localhost:3000'
 
         fetch(`${url}/S3url?name=${this.context.state.user.id + '.jpeg'}`, {
                 headers: {'Authorization': window.sessionStorage.getItem('token')},
@@ -92,7 +92,7 @@ class Profile extends React.Component {
     }
 
     onProfileUpdate = (data) => {
-        let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
+        let url = process.env.API_URL || 'http://localhost:3000'
 
         fetch(`${url}/profile/${this.context.state.user.id}`, {
             method: 'post',

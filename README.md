@@ -1,5 +1,5 @@
 # Everyting rec app
-See for yourself --> https://face-rec-app-11.herokuapp.com/
+See for yourself --> https://face-rec-app.vercel.app/
 
 ## Description
 App using Clarifai API to predict different things.\

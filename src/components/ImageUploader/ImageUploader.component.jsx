@@ -34,7 +34,7 @@ const ImageUploader = ({setImageUrl, increaseEntriesCount, displayResults}) => {
         const formData = new FormData();
         formData.append('image', file)
 
-        let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
+        let url = process.env.API_URL || 'http://localhost:3000'
 
         fetch(`${url}/localimage?model=${mode}`, {
             method: 'post',

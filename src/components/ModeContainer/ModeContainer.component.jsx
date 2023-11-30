@@ -15,7 +15,7 @@ const ModeContainer = () => {
     const [boxes, setBoxes] = useState([])
     const [results, setResults] = useState([])
 
-    let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
+    let url = process.env.API_URL || 'http://localhost:3000'
 
     useEffect(() => {
         setResults([])

@@ -33,7 +33,7 @@ class Register extends React.Component {
     }
 
     onSubmitRegister = () => {
-        let url = process.env.NODE_ENV === 'production' ? 'https://face-rec-server-api.herokuapp.com' : 'http://localhost:3000'
+        let url = process.env.API_URL || 'http://localhost:3000'
 
         this.toggleIsLoading()
         fetch(`${url}/register`, {
